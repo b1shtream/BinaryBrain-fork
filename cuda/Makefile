@@ -8,7 +8,7 @@ AR     = ar
 RM     = rm
 
 # flagas
-CUFLAGS = -I../include -std=c++11 -Xcompiler -fPIC \
+CUFLAGS = -I../include -std=c++14 -Xcompiler -fPIC \
 		   -gencode=arch=compute_52,code=sm_52 \
 		   -gencode=arch=compute_53,code=sm_53 \
 		   -gencode=arch=compute_60,code=sm_60 \
