@@ -233,7 +233,7 @@ public:
      */
     void SetOutputShape(indices_t const &shape)
     {
-        BB_ASSERT(CalcShapeSize(shape) == this->m_output_node_size);
+        BB_ASSERT(CalcShapeSize(shape) == CalcShapeSize(this->GetOutputShape()));
         m_output_shape = shape;
     }
 

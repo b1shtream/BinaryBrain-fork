@@ -25,7 +25,7 @@ os.chdir(src_path)
 
 
 # build flags
-VERBOSE     = False
+VERBOSE     = True
 WITH_CUDA   = True
 WITH_CEREAL = False
 
@@ -297,8 +297,8 @@ class BuildExt(build_ext):
         ar_args['msvc'] += []
     else:
         cuda_opts = [
-#                       '-gencode=arch=compute_35,code=sm_35',
-#                       '-gencode=arch=compute_37,code=sm_37',
+    #                    '-gencode=arch=compute_35,code=sm_35',
+    #                    '-gencode=arch=compute_37,code=sm_37',
                         '-gencode=arch=compute_50,code=sm_50',
                         '-gencode=arch=compute_52,code=sm_52',
                         '-gencode=arch=compute_53,code=sm_53',
@@ -315,15 +315,16 @@ class BuildExt(build_ext):
                         '-gencode=arch=compute_90,code=sm_90',
                     ]
         # unix(gpu)
-        cc_args['unix'] += cuda_opts + [
-                            '-Xcompiler', '-pthread',
-                            '-Xcompiler', '-mavx2',
-                            '-Xcompiler', '-mfma',
-                            '-Xcompiler', '-fopenmp',
-                            '-Xcompiler', '-std=c++14',
-                            '-Xcompiler', '-fPIC' ]
+        cc_args['unix'] += [
+                    '-pthread',
+                    '-mavx2',
+                    '-mfma',
+                    '-fopenmp',
+                    '-std=c++14',
+                    '-fPIC'
+                ]
         cu_args['unix'] += cuda_opts + [
-                            '-std=c++11',
+                            '-std=c++14',
                             '-Xcompiler', '-fPIC' ]
         ar_args['unix'] += ['-Xcompiler', '-pthread',
                             '-Xcompiler', '-fopenmp',
