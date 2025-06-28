@@ -69,26 +69,39 @@ This creates .ppm image files. These PPM images are the test inputs that you use
      
 ## Ques 3. What are the components/modules required for creating a deeper network(with 6-10 layers) Example- ResNet(skip connections)?
 
-bb.DifferentiableLut
-bb.Sequential
-bb.Convolution2d
-bb.Xor([main_path, skip_path])           # or bb.Or
-bb.PassThrough				 #identity layer
-bb.StochasticMaxPooling
-bb.Reduce
-bb.LossSoftmaxCrossEntropy
-bb.MetricsCategoricalAccuracy
-bb.OptimizerAdam
-bb.FrameBuffer.from_numpy
-bb.save_networks
-bb.load_networks
-bb.make_verilog_lut_cnv_layers
-bb.write_ppm
-bb.make_image_tile
-bb.RealToBinary
-bb.BinaryToReal
-bb.BinaryLut.from_sparse_model
-bb.DType.BIT
+bb.DifferentiableLut       #Stochastic learnable logic units. Use for each convolution-style layer.
+
+bb.Sequential              #To chain multiple layers (e.g., in blocks).
+
+bb.Convolution2d                #To apply LUT layers as spatial filters (e.g., 3x3 or 4x4).
+
+bb.Xor([main_path, skip_path])           # Residual skip connection using XOR.
+
+bb.PassThrough				 #Identity mapping for skip connections (used with bb.Xor / bb.Or).
+
+bb.StochasticMaxPooling          #Spatial downsampling after convolutional blocks.
+
+bb.Reduce                  #Final reduction to output class probabilities.
+
+bb.LossSoftmaxCrossEntropy      #For training the model using classification loss
+
+bb.MetricsCategoricalAccuracy    #To measure test/train accuracy.
+
+bb.OptimizerAdam                    #Optimizer for training.
+
+bb.FrameBuffer.from_numpy            #Converts PyTorch tensor/numpy image to BinaryBrain buffer format.
+
+bb.save_networks / bb.load_networks       #Save and load models.
+
+bb.make_verilog_lut_cnv_layers         #Export the CNN layers to Verilog.
+
+bb.write_ppm / bb.make_image_tile      #Optional, to visualize or prepare test images
+
+bb.RealToBinary / bb.BinaryToReal        #For inference with BinaryLut-based test network.
+
+bb.BinaryLut.from_sparse_model            #For converting trained DifferentiableLut into binary LUTs.
+
+bb.DType.BIT                          #For bit-level optimized inference networks
 
 
 ## Ques 4. What will be the inputs and outputs of the layer bb.Xor/bb.Or and bb.PassThrough ?
@@ -127,5 +140,6 @@ Output:
 
     Returns the exact same FrameBuffer that it received.
 
-## Ques 5. How inputs and outputs(FrameBuffer objects) of a layer looks like? 
+## Ques 5. How inputs and outputs(FrameBuffer objects) of a layer looks like?( Example: lut_layer0_0 = bb.DifferentiableLut([192], batch_norm=False, binarize=False), lut_layer0_1 = bb.DifferentiableLut([32], batch_norm=False, binarize=False)
+
 
