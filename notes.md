@@ -69,6 +69,7 @@ This creates .ppm image files. These PPM images are the test inputs that you use
      
 ## Ques 3. What are the components/modules required for creating a deeper network(with 6-10 layers) Example- ResNet(skip connections)?
 
+```
 bb.DifferentiableLut
 bb.Sequential
 bb.Convolution2d
@@ -89,6 +90,7 @@ bb.RealToBinary
 bb.BinaryToReal
 bb.BinaryLut.from_sparse_model
 bb.DType.BIT
+```
 
 
 ## Ques 4. What will be the inputs and outputs of the layer bb.Xor/bb.Or and bb.PassThrough ?
