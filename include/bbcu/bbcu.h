@@ -1245,6 +1245,15 @@ BBCU_DLL_EXPORT int bbcu_fp32_bit_Binarize_Forward
             cudaStream_t    streamId = 0
         );
 
+// --------------------------------------
+//PassThrough
+// -------------------------------------
+
+//BBCU_DLL_EXPORT int bbcu_fp32_PassThrough_Forward
+//	(
+//	 float x_buf,
+//	 bool train
+//	)
 
 // -------------------------------------
 //  Hard-Tanh

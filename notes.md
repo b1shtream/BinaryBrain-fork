@@ -142,4 +142,24 @@ Output:
 
 ## Ques 5. How inputs and outputs(FrameBuffer objects) of a layer looks like?( Example: lut_layer0_0 = bb.DifferentiableLut([192], batch_norm=False, binarize=False), lut_layer0_1 = bb.DifferentiableLut([32], batch_norm=False, binarize=False)
 
+input= 
+output of DifferentiableLut is of shape [192,28,28] 
+
+
+## Ques 6. How to implement a new layer in C++
+
+1) Implement cpp header file /include/*.h files
+- Accept input FrameBuffer<T>
+- Return the same buffer unchanged
+- support basic methods like SetInputShape, Forward, and optionally Backward
+
+2) Include it in build
+
+3) Write PyBind11 bindings, bind it (similar to DifferentiableLutN, AveragePooling)
+
+
+
+
+
+
 

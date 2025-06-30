@@ -22,7 +22,7 @@ CUFLAGS = -DBB_ASSERT_EXCEPTION=1 -DBB_WITH_CEREAL=1 -DBB_WITH_CUDA=1 \
           -Iinclude -Icuda \
 		  -I$(CEREAL_PATH) \
 		  $(CUARCH) \
-		  -std=c++11 -Xcompiler -fPIC \
+		  -std=c++14 -Xcompiler -fPIC \
 		  $(shell python3 -m pybind11 --includes)
 
 LDFLAG = -Xcompiler -pthread -Xcompiler -fopenmp -lstdc++ -lm -lcublas

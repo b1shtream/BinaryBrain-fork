@@ -315,15 +315,16 @@ class BuildExt(build_ext):
                         '-gencode=arch=compute_90,code=sm_90',
                     ]
         # unix(gpu)
-        cc_args['unix'] += cuda_opts + [
-                            '-Xcompiler', '-pthread',
-                            '-Xcompiler', '-mavx2',
-                            '-Xcompiler', '-mfma',
-                            '-Xcompiler', '-fopenmp',
-                            '-Xcompiler', '-std=c++14',
-                            '-Xcompiler', '-fPIC' ]
+        cc_args['unix'] += [
+                    '-pthread',
+                    '-mavx2',
+                    '-mfma',
+                    '-fopenmp',
+                    '-std=c++14',
+                    '-fPIC']
+
         cu_args['unix'] += cuda_opts + [
-                            '-std=c++11',
+                            '-std=c++14',
                             '-Xcompiler', '-fPIC' ]
         ar_args['unix'] += ['-Xcompiler', '-pthread',
                             '-Xcompiler', '-fopenmp',

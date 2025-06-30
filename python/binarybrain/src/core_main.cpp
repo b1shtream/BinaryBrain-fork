@@ -99,7 +99,9 @@
 #include "bb/LoadMnist.h"
 #include "bb/LoadCifar10.h"
 
-
+#include "bb/PassThrough.h"
+#include "bb/Or.h"
+#include "bb/Xor.h"
 
 #ifdef BB_WITH_CUDA
 #include "bbcu/bbcu.h"
@@ -278,6 +280,10 @@ using UniformDistributionGenerator_fp32      = bb::UniformDistributionGenerator<
 using TrainData_fp32                         = bb::TrainData<float>;
 using LoadMnist_fp32                         = bb::LoadMnist<float>;
 using LoadCifar10_fp32                       = bb::LoadCifar10<float>;
+
+using PassThrough_fp32			     = bb::PassThrough<float>;
+using Xor				     = bb::Xor;
+using Or				     = bb::Or;
 
 //using RunStatus                            = bb::RunStatus;
 //using Runner                               = bb::Runner<float>;
@@ -460,7 +466,13 @@ PYBIND11_MODULE(core, m) {
     m.def("dtype_get_bit_size", &bb::DataType_GetBitSize);
     m.def("dtype_get_byte_size", &bb::DataType_GetByteSize);
     
+    // -----------------------------------
+    // Utility Functions/Operators
+    // -----------------------------------
 
+    m.def("XorOp", &bb::Xor::XorOp, "Apply XOR to two binary FrameBuffers");
+
+    m.def("OrOp", &bb::Or::OrOp, "Apply OR to two binary FrameBuffers");
 
     // ------------------------------------
     //  Object
@@ -1074,7 +1086,6 @@ PYBIND11_MODULE(core, m) {
     PYCLASS_MODEL(DifferentiableLut2_bit_fp32, DifferentiableLutModel)
         .def_static("create", &DifferentiableLut2_bit_fp32::CreatePy);
 
-
     // DifferentiableLutDiscrete
     PYCLASS_MODEL(DifferentiableLutDiscrete6_fp32_fp32, StochasticLutModel)
         .def_static("create", &DifferentiableLutDiscrete6_fp32_fp32::CreatePy);
@@ -1179,7 +1190,10 @@ PYBIND11_MODULE(core, m) {
         .def_static("create", &UpSampling_fp32_fp32::CreatePy);
     PYCLASS_MODEL(UpSampling_bit_fp32, Model)
         .def_static("create", &UpSampling_bit_fp32::CreatePy);
-    
+
+    //PassThrough Layer
+    PYCLASS_MODEL(PassThrough_fp32, Model)
+	    .def_static("create", &PassThrough_fp32::CreatePy);
     
     // activation
     PYCLASS_MODEL(Activation, Model)

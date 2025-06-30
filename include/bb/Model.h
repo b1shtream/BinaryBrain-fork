@@ -282,7 +282,11 @@ public:
     }
 
    /**
-     * @brief  ノード単位でのForward計算
+     * @brief  ノード単位でのF
+202     virtual std::vector<indices_t> GetOutputShapeMulti(void) const
+203     {
+204         auto shape = GetOutputShape();
+205         return {shape};orward計算
      * @detail ノード単位でforward演算を行う
      * @param  node  計算対象のノード
      * @param  x_vec 入力データ
