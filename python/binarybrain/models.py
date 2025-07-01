@@ -2040,7 +2040,7 @@ def get_model_list(net, flatten:bool =False):
             else:
                 out_list.append(model)
     
-    out_list = []
+    out_list = [
     flatten_list(net, out_list)
     
     return out_list

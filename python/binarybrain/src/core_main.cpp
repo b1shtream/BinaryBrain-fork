@@ -471,8 +471,16 @@ PYBIND11_MODULE(core, m) {
     // -----------------------------------
 
     m.def("XorOp", &bb::Xor::XorOp, "Apply XOR to two binary FrameBuffers");
+    m.def("XorPrintBuffer", &bb::Xor::printBuffer, "Prints values of XOR operation from two FrameBuffers");
 
     m.def("OrOp", &bb::Or::OrOp, "Apply OR to two binary FrameBuffers");
+
+    // -----------------------------------
+    // PassThrough layer
+    // ----------------------------------
+
+    //py::class_< PassThrough_fp32, Model, std::shared_ptr<PassThrough_fp32>>(m, "PassThrough")
+    //	    .def_static("create", &PassThrough_fp32::CreatePy);
 
     // ------------------------------------
     //  Object
@@ -1192,8 +1200,14 @@ PYBIND11_MODULE(core, m) {
         .def_static("create", &UpSampling_bit_fp32::CreatePy);
 
     //PassThrough Layer
+    // PYCLASS_MODEL(PassThrough_fp32, Model)
+    //	    .def_static("create", &PassThrough_fp32::CreatePy);
+    
+    //py::class_< PassThrough_fp32, Model, std::shared_ptr<PassThrough_fp32>>(m, "PassThrough")
+    //	    .def_static("create", &PassThrough_fp32::CreatePy);
+    
     PYCLASS_MODEL(PassThrough_fp32, Model)
-	    .def_static("create", &PassThrough_fp32::CreatePy);
+	    .def_static("create",   &PassThrough_fp32::CreatePy);
     
     // activation
     PYCLASS_MODEL(Activation, Model)
