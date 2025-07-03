@@ -160,6 +160,7 @@ class FrameBuffer(bb.Object):
         """
         
         shape = list(ndarray.shape)
+        print("shape inside from_numpy:", shape)
         assert(len(shape) >= 2)
         bb_dtype = bb.dtype_numpy_to_bb(ndarray.dtype)
         frame_size   = shape[0]

@@ -194,8 +194,8 @@ class Model(bb.Object):
         Returns:
             output_shape (List[int]): 出力シェイプ
         """
-#        print('set_input_shape:', self.get_model_name())
-#        print('input_shape:', input_shape)
+        print('set_input_shape:', self.get_model_name())
+        print('input_shape:', input_shape)
 
         if type(input_shape) == list and len(input_shape) > 0 and type(input_shape[0]) == list:
             output_shapes = self.set_input_shape_multi(input_shape)
@@ -890,7 +890,16 @@ class BinaryToReal(Model):
 
 model_creator_regist('BinaryToReal', BinaryToReal.from_bytes)
 
+# Identity/ PassThrough_fp32 
 
+class Identity(Model):
+    
+    def __init__(self, name=None):
+        core_model = core.PassThrough_fp32.create()
+        super().__init__(core_model=core_model, name=name)
+
+
+model_creator_regist('Identity', Identity.from_bytes)
 
 class BitEncode(Model):
     """BitEncode class
@@ -1616,7 +1625,7 @@ class Convolution2d(Sequential):
         self.input_shape = shape
         
         # 出力サイズ計算
-        # input_c_size = shape[0]
+       # input_c_size = shape[0]
         input_h_size = shape[1]
         input_w_size = shape[2]
         padding     = self.im2col.get_padding()
@@ -1639,6 +1648,7 @@ class Convolution2d(Sequential):
     
     def forward(self, x_buf, train=True):
         shape = x_buf.get_node_shape()
+        print("get node shape: ", shape)
         self.set_input_shape(shape)
         if train:
             self.shapes.append(shape)
@@ -2040,7 +2050,7 @@ def get_model_list(net, flatten:bool =False):
             else:
                 out_list.append(model)
     
-    out_list = [
+    out_list = []
     flatten_list(net, out_list)
     
     return out_list

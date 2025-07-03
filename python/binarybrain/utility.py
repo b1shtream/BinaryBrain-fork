@@ -2,10 +2,17 @@ import binarybrain as bb
 import binarybrain.core as core
 from binarybrain.frame_buffer import FrameBuffer
 
-def identity_layer():
-    return core.PassThrough_fp32.create()
+#def identity_layer():
+#    return core.PassThrough_fp32.create()
 
 def Xor(buf1: FrameBuffer, buf2: FrameBuffer) -> FrameBuffer:
+    #return FrameBuffer.from_core(core.XorOp(buf1.get_core(), buf2.get_core()))
+    print("type(buf1): ", type(buf1.get_core()))
+    print("type(buf2): ", type(buf2.get_core()))
+    print("buf1.get_frame_size(): ", buf1.get_frame_size())
+    print("buf1.get_node_shape(): ", buf1.get_node_shape())
+    print("buf2.get_frame_size(): ", buf2.get_frame_size())
+    print("buf2.get_node_shape(): ", buf2.get_node_shape())
     return FrameBuffer.from_core(core.XorOp(buf1.get_core(), buf2.get_core()))
 
 def Or(buf1: FrameBuffer, buf2: FrameBuffer) -> FrameBuffer:
