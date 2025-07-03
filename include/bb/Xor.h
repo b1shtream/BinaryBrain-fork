@@ -17,6 +17,11 @@ namespace bb {
          * @throws std::runtime_error if shapes don't match or types aren't binary
          */
         static FrameBuffer XorOp(FrameBuffer const& buf1, FrameBuffer const& buf2) {
+		//std::cout<<"THIS IS buf1: " << buf1 << std::endl;
+		std::cout <<" this is buffer 1 shape: "<< buf1.GetShape()  << "this is buffer 2 shape: " << buf2.GetShape() << std::endl;
+
+		std::cout<<"This IS BUF2: " << buf2 << std::endl;
+
             if (buf1.GetShape() != buf2.GetShape()) {
                 throw std::runtime_error("XorOp: Input buffer shapes must match");
             }
